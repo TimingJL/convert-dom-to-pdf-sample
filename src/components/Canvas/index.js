@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Draggable from 'react-draggable';
 import html2canvas from 'html2canvas';
 import { jsPDF } from "jspdf";
 
 import templatePath from 'assets/certificate-template.png';
+import { ThreeColorsTemplatePortrait } from 'components/common/icons';
 
 /** Ref:
  * https://stackoverflow.com/questions/23104008/where-to-change-default-pdf-page-width-and-font-size-in-jspdf-debug-js
 */
+
+const SIZE_HEIGHT = 679;
+const SIZE_WEIGHT = 480;
 
 const InputGroup = styled.div`
 	padding: 20px 0px;
@@ -26,13 +31,14 @@ const Button = styled.button`
 `;
 
 const CanvasWrapper = styled.div`
-	width: 595px;
-	height: 842px;
+	width: ${SIZE_WEIGHT}px;
+	height: ${SIZE_HEIGHT}px;
 	position: relative;
 
-	background: url(${props => props.imageUrl});
+	/* background: url(${props => props.imageUrl});
 	background-size: contain;
-	background-repeat: no-repeat;
+	background-repeat: no-repeat; */
+	background: pink;
 `;
 
 const StudentName = styled.div`
@@ -43,6 +49,9 @@ const StudentName = styled.div`
 	justify-content: center;
 	font-size: 32px;
 	font-weight: 700;
+	cursor: grab;
+	cursor: -moz-grab;
+	cursor: -webkit-grab;
 `;
 
 const CourseName = styled.div`
@@ -51,17 +60,25 @@ const CourseName = styled.div`
 	width: 100%;
 	display: flex;
 	justify-content: center;
-	font-size: 24px;
+	font-size: 16px;
+	color: #4B7F83;
+
+	cursor: grab;
+	cursor: -moz-grab;
+	cursor: -webkit-grab;
 `;
 
 const Canvas = () => {
-	const [studentName, setStudentName] = useState('剔趣斯');
+	const [studentName, setStudentName] = useState('金城武');
 	const [courseName, setCourseName] = useState('我要成為開課王');
+	const [backgroundUrl, setBackgroundUrl] = useState();
 
 	const handleDownloadAsPng = () => {
 		html2canvas(document.querySelector("#capture")).then(canvas => {
 			var link = document.createElement('a');
 			link.download = 'filename.png';
+			console.log('canvas: ', canvas);
+			console.log('link: ', link);
 			link.href = canvas.toDataURL();
 			link.click();
 		});
@@ -69,7 +86,7 @@ const Canvas = () => {
 
 	const handleDownloadAsPdf = () => {
 		console.log('download as pdf')
-		var doc = new jsPDF('p', 'mm', [842, 598]); // p => portrait, l => landscape
+		var doc = new jsPDF('p', 'mm', [SIZE_HEIGHT, SIZE_WEIGHT]); // p => portrait, l => landscape
 		html2canvas(document.querySelector("#capture")).then(canvas => {
 			doc.addImage(canvas.toDataURL("image/png"), 'PNG', 0, 0, canvas.width, canvas.height);
 			doc.save('sample-file.pdf');
@@ -86,6 +103,13 @@ const Canvas = () => {
 		setCourseName(value);
 	}
 
+	const handleChangeBackgroundUrl = (event) => {
+		const value = event.target.value;
+		setBackgroundUrl(value);
+	}
+
+	console.log('templatePath: ', templatePath)
+
 	return (
 		<div>
 			<ButtonGroup>
@@ -101,10 +125,19 @@ const Canvas = () => {
 					<label htmlFor="">課程名稱：</label>
 					<input type="text" value={courseName} onChange={handleChangeCourseName} />
 				</div>
+				<div>
+					<label htmlFor="">背景圖片 URL ：</label>
+					<input type="text" onChange={handleChangeBackgroundUrl} />
+				</div>
 			</InputGroup>
-			<CanvasWrapper id="capture" imageUrl={templatePath}>
-				<StudentName>{studentName}</StudentName>
-				<CourseName>{courseName}</CourseName>
+			<CanvasWrapper id="capture">
+				<ThreeColorsTemplatePortrait />
+				<Draggable>
+					<StudentName>{studentName}</StudentName>
+				</Draggable>
+				<Draggable>
+					<CourseName>{courseName}</CourseName>
+				</Draggable>
 			</CanvasWrapper>
 		</div>
 	);
