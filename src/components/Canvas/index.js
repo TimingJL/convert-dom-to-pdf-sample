@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import Draggable from 'react-draggable';
 import html2canvas from 'html2canvas';
 import { jsPDF } from "jspdf";
-
-import templatePath from 'assets/certificate-template.png';
 import { ThreeColorsTemplatePortrait } from 'components/common/icons';
 
 /** Ref:
@@ -34,16 +32,11 @@ const CanvasWrapper = styled.div`
 	width: ${SIZE_WEIGHT}px;
 	height: ${SIZE_HEIGHT}px;
 	position: relative;
-
-	/* background: url(${props => props.imageUrl});
-	background-size: contain;
-	background-repeat: no-repeat; */
-	background: pink;
 `;
 
 const StudentName = styled.div`
 	position: absolute;
-	top: 380px;
+	top: 200px;
 	width: 100%;
 	display: flex;
 	justify-content: center;
@@ -56,7 +49,7 @@ const StudentName = styled.div`
 
 const CourseName = styled.div`
 	position: absolute;
-	top: 430px;
+	top: 290px;
 	width: 100%;
 	display: flex;
 	justify-content: center;
@@ -71,7 +64,6 @@ const CourseName = styled.div`
 const Canvas = () => {
 	const [studentName, setStudentName] = useState('金城武');
 	const [courseName, setCourseName] = useState('我要成為開課王');
-	const [backgroundUrl, setBackgroundUrl] = useState();
 
 	const handleDownloadAsPng = () => {
 		html2canvas(document.querySelector("#capture")).then(canvas => {
@@ -103,13 +95,6 @@ const Canvas = () => {
 		setCourseName(value);
 	}
 
-	const handleChangeBackgroundUrl = (event) => {
-		const value = event.target.value;
-		setBackgroundUrl(value);
-	}
-
-	console.log('templatePath: ', templatePath)
-
 	return (
 		<div>
 			<ButtonGroup>
@@ -124,10 +109,6 @@ const Canvas = () => {
 				<div>
 					<label htmlFor="">課程名稱：</label>
 					<input type="text" value={courseName} onChange={handleChangeCourseName} />
-				</div>
-				<div>
-					<label htmlFor="">背景圖片 URL ：</label>
-					<input type="text" onChange={handleChangeBackgroundUrl} />
 				</div>
 			</InputGroup>
 			<CanvasWrapper id="capture">
