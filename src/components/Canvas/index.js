@@ -64,6 +64,9 @@ const CourseName = styled.div`
 const Canvas = () => {
 	const [studentName, setStudentName] = useState('金城武');
 	const [courseName, setCourseName] = useState('我要成為開課王');
+	const [color01, setColor01] = useState('#4B7F83');
+	const [color02, setColor02] = useState('#AC4E41');
+	const [color03, setColor03] = useState('#C68539');
 
 	const handleDownloadAsPng = () => {
 		html2canvas(document.querySelector("#capture")).then(canvas => {
@@ -110,9 +113,25 @@ const Canvas = () => {
 					<label htmlFor="">課程名稱：</label>
 					<input type="text" value={courseName} onChange={handleChangeCourseName} />
 				</div>
+				<div>
+					<label htmlFor="">Color01：</label>
+					<input type="color" id="head" name="head" value={color01} onChange={(event) => setColor01(event.target.value)} />
+				</div>
+				<div>
+					<label htmlFor="">Color02：</label>
+					<input type="color" id="head" name="head" value={color02} onChange={(event) => setColor02(event.target.value)} />
+				</div>
+				<div>
+					<label htmlFor="">Color03：</label>
+					<input type="color" id="head" name="head" value={color03} onChange={(event) => setColor03(event.target.value)} />
+				</div>
 			</InputGroup>
 			<CanvasWrapper id="capture">
-				<ThreeColorsTemplatePortrait />
+				<ThreeColorsTemplatePortrait
+					color01={color01}
+					color02={color02}
+					color03={color03}
+				/>
 				<Draggable>
 					<StudentName>{studentName}</StudentName>
 				</Draggable>
