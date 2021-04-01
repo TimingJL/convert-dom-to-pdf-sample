@@ -1,6 +1,6 @@
 {
   "name": "convert-dom-to-pdf",
-	"homepage": "http://timingjl.github.io/convert-dom-to-pdf-sample",
+	"homepage": "https://timingjl.github.io/convert-dom-to-pdf-sample",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
