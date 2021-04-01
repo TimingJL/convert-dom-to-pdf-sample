@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/convert-dom-to-pdf-sample/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/convert-dom-to-pdf-sample/static/js/main.5046cf71.chunk.js",
+    "main.js.map": "/convert-dom-to-pdf-sample/static/js/main.5046cf71.chunk.js.map",
+    "runtime-main.js": "/convert-dom-to-pdf-sample/static/js/runtime-main.5d54cb6d.js",
+    "runtime-main.js.map": "/convert-dom-to-pdf-sample/static/js/runtime-main.5d54cb6d.js.map",
+    "static/js/2.d5acf45c.chunk.js": "/convert-dom-to-pdf-sample/static/js/2.d5acf45c.chunk.js",
+    "static/js/2.d5acf45c.chunk.js.map": "/convert-dom-to-pdf-sample/static/js/2.d5acf45c.chunk.js.map",
+    "static/js/3.11294fea.chunk.js": "/convert-dom-to-pdf-sample/static/js/3.11294fea.chunk.js",
+    "static/js/3.11294fea.chunk.js.map": "/convert-dom-to-pdf-sample/static/js/3.11294fea.chunk.js.map",
+    "static/js/4.7226aa33.chunk.js": "/convert-dom-to-pdf-sample/static/js/4.7226aa33.chunk.js",
+    "static/js/4.7226aa33.chunk.js.map": "/convert-dom-to-pdf-sample/static/js/4.7226aa33.chunk.js.map",
+    "static/js/5.2211dab8.chunk.js": "/convert-dom-to-pdf-sample/static/js/5.2211dab8.chunk.js",
+    "static/js/5.2211dab8.chunk.js.map": "/convert-dom-to-pdf-sample/static/js/5.2211dab8.chunk.js.map",
+    "index.html": "/convert-dom-to-pdf-sample/index.html",
+    "static/css/main.6dea0f05.chunk.css.map": "/convert-dom-to-pdf-sample/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.d5acf45c.chunk.js.LICENSE.txt": "/convert-dom-to-pdf-sample/static/js/2.d5acf45c.chunk.js.LICENSE.txt",
+    "static/js/3.11294fea.chunk.js.LICENSE.txt": "/convert-dom-to-pdf-sample/static/js/3.11294fea.chunk.js.LICENSE.txt",
+    "static/js/4.7226aa33.chunk.js.LICENSE.txt": "/convert-dom-to-pdf-sample/static/js/4.7226aa33.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5d54cb6d.js",
+    "static/js/3.11294fea.chunk.js",
+    "static/css/main.6dea0f05.chunk.css",
+    "static/js/main.5046cf71.chunk.js"
+  ]
+}
