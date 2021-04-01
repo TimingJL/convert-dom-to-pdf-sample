@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Draggable from 'react-draggable';
 import html2canvas from 'html2canvas';
 import { jsPDF } from "jspdf";
 import { ThreeColorsTemplatePortrait } from 'components/common/icons';
@@ -14,6 +13,8 @@ const SIZE_WEIGHT = 480;
 
 const InputGroup = styled.div`
 	padding: 20px 0px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
 `;
 
 const ButtonGroup = styled.div`
@@ -28,45 +29,12 @@ const Button = styled.button`
 	cursor: pointer;
 `;
 
-const CanvasWrapper = styled.div`
-	width: ${SIZE_WEIGHT}px;
-	height: ${SIZE_HEIGHT}px;
-	position: relative;
-`;
-
-const StudentName = styled.div`
-	position: absolute;
-	top: 200px;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	font-size: 32px;
-	font-weight: 700;
-	cursor: grab;
-	cursor: -moz-grab;
-	cursor: -webkit-grab;
-`;
-
-const CourseName = styled.div`
-	position: absolute;
-	top: 290px;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	font-size: 16px;
-	color: #4B7F83;
-
-	cursor: grab;
-	cursor: -moz-grab;
-	cursor: -webkit-grab;
-`;
-
 const Canvas = () => {
-	const [studentName, setStudentName] = useState('金城武');
-	const [courseName, setCourseName] = useState('我要成為開課王');
 	const [color01, setColor01] = useState('#4B7F83');
 	const [color02, setColor02] = useState('#AC4E41');
 	const [color03, setColor03] = useState('#C68539');
+	const [htmlString, setHtmlString] = useState('');
+	const [dataUrl, setDatUrl] = useState('');
 
 	const handleDownloadAsPng = () => {
 		html2canvas(document.querySelector("#capture")).then(canvas => {
@@ -88,31 +56,26 @@ const Canvas = () => {
 		});
 	};
 
-	const handleChangeStudentName = (event) => {
-		const value = event.target.value;
-		setStudentName(value);
-	}
+	const handleConvertToHtml = () => {
+		const html = document.getElementById('capture');
+		setHtmlString(html.innerHTML);
+	};
 
-	const handleChangeCourseName = (event) => {
-		const value = event.target.value;
-		setCourseName(value);
-	}
+	const handleConvertToDataUrl = () => {
+		html2canvas(document.querySelector("#capture")).then(canvas => {
+			setDatUrl(canvas.toDataURL("image/png"));
+		});
+	};
 
 	return (
 		<div>
 			<ButtonGroup>
 				<Button onClick={handleDownloadAsPng}>Download as *.png</Button>
 				<Button onClick={handleDownloadAsPdf}>Download as *.pdf</Button>
+				<Button onClick={handleConvertToHtml}>Update SVG string</Button>
+				<Button onClick={handleConvertToDataUrl}>Convert to data url</Button>
 			</ButtonGroup>
 			<InputGroup>
-				<div>
-					<label htmlFor="">學生姓名：</label>
-					<input type="text" value={studentName} onChange={handleChangeStudentName} />
-				</div>
-				<div>
-					<label htmlFor="">課程名稱：</label>
-					<input type="text" value={courseName} onChange={handleChangeCourseName} />
-				</div>
 				<div>
 					<label htmlFor="">Color01：</label>
 					<input type="color" id="head" name="head" value={color01} onChange={(event) => setColor01(event.target.value)} />
@@ -126,19 +89,15 @@ const Canvas = () => {
 					<input type="color" id="head" name="head" value={color03} onChange={(event) => setColor03(event.target.value)} />
 				</div>
 			</InputGroup>
-			<CanvasWrapper id="capture">
+			<textarea name="" id="" cols="30" rows="10" value={htmlString} readOnly></textarea>
+			<textarea name="" id="" cols="30" rows="10" value={dataUrl} readOnly></textarea>
+			<div id="capture">
 				<ThreeColorsTemplatePortrait
 					color01={color01}
 					color02={color02}
 					color03={color03}
 				/>
-				<Draggable>
-					<StudentName>{studentName}</StudentName>
-				</Draggable>
-				<Draggable>
-					<CourseName>{courseName}</CourseName>
-				</Draggable>
-			</CanvasWrapper>
+			</div>
 		</div>
 	);
 };
